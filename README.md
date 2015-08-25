@@ -31,7 +31,7 @@ En un browser abrir la consola [Cloudera Manager web console](http://vm-cluster-
 * **Paso 1:** seleccionar la opción de remesas con CDH
 * **Paso 2:** instalar el kit de desarrollo SE de Oracle
 * **Paso 3:** crear un usuario por cada paquete instalado, de preferencia no marcar la opción de usuario único
-* **Paso 4:** para el login, utilizar el usuario **vagrant** con contraseña **password** para todos los nodos
+* **Paso 4:** para el login, utilizar el usuario **vagrant** con contraseña **vagrant** para todos los nodos
 * En la sección de **Configuración de servicios a instalar** seleccionar **Núcleo con HBase**
 * Dejar por defecto los roles de cada aplicación
 * En la sección de configuración de bases de datos, utilizar la opción de **bases de datos incrustadas**
