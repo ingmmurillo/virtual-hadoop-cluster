@@ -1,3 +1,5 @@
-### Vagrant ###
 .vagrant/
+.idea/
 vagrant_ansible_inventory*
+*.iml
+target/

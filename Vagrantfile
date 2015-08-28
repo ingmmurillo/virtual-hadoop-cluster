@@ -44,6 +44,8 @@ Vagrant.configure("2") do |config|
   # Define base image
   config.vm.box = "precise64"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  config.vm.synced_folder "src/", "/home/vagrant/src", create: true,
+    owner: "vagrant", group: "vagrant"
 
   # Manage /etc/hosts on host and VMs
   config.hostmanager.enabled = false

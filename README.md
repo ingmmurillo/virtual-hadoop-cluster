@@ -15,11 +15,11 @@ Antes de correr el provisionamiento del clúster es necesario tener instalado:
 
 ## Instrucciones de Provisionamiento
 Instalar [**Vagrant Hostmanager plugin**](https://github.com/smdahlen/vagrant-hostmanager)
-```bash
+```sh-session
 vagrant plugin install vagrant-hostmanager
 ```
 Correr el provisionamiento
-```bash
+```sh-session
 vagrant up
 ```
 En un browser abrir la consola [Cloudera Manager web console](http://vm-cluster-node1:7180)
@@ -39,8 +39,33 @@ En un browser abrir la consola [Cloudera Manager web console](http://vm-cluster-
 
 ## Problemas conocidos
 Sí el servicio de **Cloudera Management Service** no inicia, ejecutar la siguiente secuencia de comandos:
-```bash
+```sh-session
 vagrant ssh master
 service cloudera-scm-server stop
 service cloudera-scm-server start
+```
+
+Es importante cambiar la siguiente configuración para evitar problemas de notificación del status de los nodos en **Cloudera Manager.**
+* Acceder a los nodos esclavos provisionados [slave1, slave2, slave3] y ejecutar lo siguiente:
+```sh-session
+vagrant ssh slave1
+sudo sysctl -w vm.swappiness=0
+sudo vi /etc/sysctl.conf
+```
+* Agregar la siguiente línea al final del archivo **/etc/sysctl.conf**:
+```properties
+vm.swappiness = 0
+```
+* **NOTA:** Hacer éste mismo procedimiento para todos los nodos esclavos que se tenga en el clúster. Para verificar el cambio ejecutar **cat /proc/sys/vm/swappiness**
+
+##Variables de Configuración Importantes
+Sí se tienen menos nodos (Data Nodes) configurados en el provisionamiento, es conveniente cambiar el factor de replicación de **HDFS**:
+```properties
+dfs.replication = NroDataNodes
+```
+
+Es importante configurar correctamente los recursos del cluster para **YARN**, configurar las variables:
+```properties
+yarn.nodemanager.resource.memory-mb = NroMegaBytesCluster
+yarn.nodemanager.resource.cpu-vcores = NroProcesadoresCluster
 ```
